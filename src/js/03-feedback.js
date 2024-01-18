@@ -41,6 +41,6 @@ function loadForm() {
     formEl.email.value = data.email || '';
     formEl.message.value = data.message || '';
   } catch (error) {
-    console.error('Error.message ', error.message);
+    console.error('Error_message ', error.message);
   }
 }
