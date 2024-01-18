@@ -1,6 +1,6 @@
 import _throttle from 'lodash.throttle';
 const formEl = document.querySelector('.feedback-form');
-const LOCAL_STORAGE_KEY = 'feedback-form-state';
+const LOCAL_STORAGE = 'feedback-form-state';
 
 let data = {};
 
@@ -11,11 +11,11 @@ formEl.addEventListener('input', _throttle(onSaveFormInput, 500));
 formEl.addEventListener('submit', onFormSubmit);
 
 function onSaveFormInput(event) {
-  data = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
+  data = JSON.parse(localStorage.getItem(LOCAL_STORAGE)) || {};
 
   data[event.target.name] = event.target.value;
 
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+  localStorage.setItem(LOCAL_STORAGE, JSON.stringify(data));
 }
 
 function onFormSubmit(event) {
@@ -27,12 +27,12 @@ function onFormSubmit(event) {
 
   event.target.reset();
   console.log(data);
-  localStorage.removeItem(LOCAL_STORAGE_KEY);
+  localStorage.removeItem(LOCAL_STORAGE);
 }
 
 function loadForm() {
   try {
-    let formLoad = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    let formLoad = JSON.parse(localStorage.getItem(LOCAL_STORAGE));
     if (!formLoad) {
       return;
     }
